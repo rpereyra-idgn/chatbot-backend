@@ -5,7 +5,13 @@ require("dotenv").config();
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: "https://idrogenojeans.com" })); // Permite solicitudes desde tu dominio
+
+// Configurar CORS correctamente
+app.use(cors({
+    origin: "https://idrogenojeans.com", // Permitir solo tu dominio
+    methods: ["POST"], // Métodos permitidos
+    allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 app.post("/chatbot", async (req, res) => {
     const { message } = req.body;
